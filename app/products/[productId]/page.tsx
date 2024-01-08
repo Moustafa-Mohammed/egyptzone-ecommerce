@@ -1,5 +1,5 @@
 import { getSingleProduct } from "@/app/api/products";
-import Card from "@/components/ui/ProductItem";
+import Card from "@/components/ui/ProductCard";
 
 export default async function ProductDetails({
   params,
