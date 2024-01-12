@@ -1,5 +1,5 @@
 import { getSingleProduct } from "@/app/api/products";
-import Card from "@/components/ui/ProductCard";
+import ProductCard from "@/components/ProductCard";
 
 export default async function ProductDetails({
   params,
@@ -9,10 +9,7 @@ export default async function ProductDetails({
   const product = await getSingleProduct(params.productId);
   return (
     <div className="container mx-auto max-w-5xl border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-screen">
-      {/* <div>
-        <img src="" alt="" />
-      </div> */}
-      <Card {...product} />
+      <ProductCard {...product} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import ProductCard, { ProductProps } from "@/components/ui/ProductCard";
+import ProductCard, { ProductProps } from "@/components/ProductCard";
 
 export default async function ProductList({
   products,

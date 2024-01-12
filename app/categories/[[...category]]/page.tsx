@@ -1,5 +1,5 @@
 import { getProductsInCategory } from "@/app/api/products";
-import ProductList from "@/components/ui/ProductList";
+import ProductList from "@/components/ProductList";
 
 export default async function Category({
   params,
@@ -7,5 +7,6 @@ export default async function Category({
   params: { category: string };
 }) {
   const products = await getProductsInCategory(params.category);
+  console.log(params);
   return <ProductList products={products} />;
 }

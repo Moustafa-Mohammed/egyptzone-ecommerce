@@ -1,6 +1,6 @@
 import Link from "next/link";
-import AddToCart from "./AddToCart";
 import Image from "next/image";
+import AddToCart from "@/components/AddToCart";
 
 export default function ProductCard({
   title,
@@ -10,23 +10,26 @@ export default function ProductCard({
   rating: { rate, count },
 }: ProductProps) {
   return (
-    <div className="h-[400px] flex flex-col w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <Link href={`/products/${id}`} className="flex-1 relative">
+    <div className="group p-4 h-[400px] flex flex-col w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow  hover:drop-shadow-xl dark:bg-gray-800 dark:border-gray-700">
+      <Link
+        href={`/products/${id}`}
+        className="flex-1 relative overflow-hidden"
+      >
         <Image
-          className="p-4 rounded-t-lg"
+          className="rounded-t-lg object-contain group-hover:scale-110 transition duration-[2000ms] ease-in-out"
           src={image}
           alt={title}
           priority
           fill
-          objectFit="contain"
+          sizes="(max-width: 639px) 100vw, (max-width: 768px) 50vw, 25vw"
         />
       </Link>
-      <div className="px-5 flex-1">
-        <a href="#">
-          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+      <div className="px-5 flex-1 flex flex-col mt-4">
+        <Link href={`/products/${id}`}>
+          <h5 className="text-lg font-semibold tracking-tight">
             {title.length > 40 ? title.slice(0, 40) + "..." : title}
           </h5>
-        </a>
+        </Link>
         <div className="flex items-center mt-2.5 mb-5">
           <div className="flex items-center space-x-1 rtl:space-x-reverse">
             <svg
@@ -79,10 +82,8 @@ export default function ProductCard({
             {rate}
           </span>
         </div>
-        <div className="flex items-center justify-between">
-          <span className="text-3xl font-bold text-gray-900 dark:text-white">
-            ${price}
-          </span>
+        <div className="flex items-center justify-between mt-auto">
+          <span className="text-sm font-bold dark:text-white">${price}</span>
           <AddToCart />
         </div>
       </div>

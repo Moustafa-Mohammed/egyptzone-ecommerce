@@ -1,10 +1,9 @@
-"use client";
+import NavLink from "@/components/NavLink";
+import { LinkInterface } from "@/components/NavLink";
+import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { usePathname } from "next/navigation";
 
-const links = [
+const links: LinkInterface[] = [
   { name: "All", href: "/" },
   { name: "Men", href: "/categories/men's clothing" },
   { name: "Women", href: "/categories/women's clothing" },
@@ -12,45 +11,101 @@ const links = [
   { name: "Electronics", href: "/categories/electronics" },
 ];
 
-export default function Navbar() {
-  const pathname = usePathname();
+export default async function Navbar() {
   return (
-    <header className="mb-8 border-b">
-      <div className="flex items-center justify-between mx-auto max-w-2xl lg:max-w-7xl px-4 sm:px-6">
-        <Link href="/">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold ">
-            Egypt<span className="text-primary">Zone</span>
-          </h1>
+    <div className="navbar bg-base-100">
+      <div className="navbar-start">
+        <Link href="/" className="btn btn-ghost text-xl">
+          Egypt<span className="text-neutral">Zone</span>
         </Link>
-        <nav className="hidden lg:flex gap-12 2xl:ml-16">
-          {links.map((link, idx) => (
-            <div key={idx}>
-              {pathname === link.href ? (
-                <Link
-                  href={link.href}
-                  className="text-lg font-semibold text-primary"
-                >
-                  {link.name}
-                </Link>
-              ) : (
-                <Link
-                  href={link.href}
-                  className="text-lg font-semibold text-gray-600"
-                >
-                  {link.name}
-                </Link>
-              )}
-            </div>
-          ))}
-        </nav>
+      </div>
 
-        <div className="flex">
-          <Button className="flex flex-col rounded-none h-12 md:h-16 gap-y-1.5 w-16">
-            <ShoppingBag />
-            <span className="hidden md:block">Cart</span>
-          </Button>
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">
+          {links.map((link, idx) => (
+            <NavLink key={idx} {...link} />
+          ))}
+        </ul>
+      </div>
+
+      <div className="navbar-end">
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle group"
+          >
+            <div className="indicator ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+              <span
+                className="badge badge-sm badge-primary group-hover:badge-ghost
+               indicator-item"
+              >
+                8
+              </span>
+            </div>
+          </div>
+          <div
+            tabIndex={0}
+            className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
+          >
+            <div className="card-body">
+              <span className="font-bold text-lg">8 Items</span>
+              <span className="text-info">Subtotal: $999</span>
+              <div className="card-actions">
+                <button className="btn btn-primary btn-block">View cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar"
+          >
+            <div className="w-10 rounded-full">
+              <Image
+                alt="Tailwind CSS Navbar component"
+                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                width={200}
+                height={200}
+              />
+            </div>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a className="justify-between">
+                Profile
+                <span className="badge">New</span>
+              </a>
+            </li>
+            <li>
+              <a>Settings</a>
+            </li>
+            <li>
+              <a>Logout</a>
+            </li>
+          </ul>
         </div>
       </div>
-    </header>
+    </div>
   );
 }
